@@ -1,6 +1,11 @@
 // 1462. Course Schedule IV 
 // https://leetcode.com/problems/course-schedule-iv
-// 0ms Solution
+// 0ms Solution with SIMD
+
+/*
+    This is an experimental approach with SIMD and got 0ms. 
+    uint128_t should be a better approach, but got 3ms.
+*/
 
 #include <immintrin.h>
 /* 
@@ -12,9 +17,15 @@ typedef __m128i u128;
 
 class Solution {
 public:
+    // pseudo arithmetic shift left
     static inline u128 shift(u128 bs, int x) {
+        /*
+            This is not a real arithmetic shift left: since 128bit arithmetic is not supported, 64bit is used instead.
+            shifting lower 64 bit and higher 64 bit as two isolated variables uint64_t,
+            but this is ok since we only shift 0x1.
+        */
         if (x >= 64) {
-            bs = _mm_slli_si128(bs, 8);
+            bs = _mm_slli_si128(bs, 8); // shift left 8 byte (note: the second arguments must be an immediate)
             return _mm_slli_epi64(bs, x - 64);
         }
         return _mm_slli_epi64(bs, x);
