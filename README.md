@@ -1,2 +1,1 @@
-Collection of personal solutions with comments.
-0ms runtime/fastest at the time of submission.
+Collection of personal solutions for [leetcode](https://leetcode.com/problems)

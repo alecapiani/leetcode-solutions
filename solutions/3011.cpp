@@ -2,9 +2,11 @@
 // https://leetcode.com/problems/find-if-array-can-be-sorted/
 // 0ms solution
 
+#pragma GCC target("popcnt")
+
 class Solution {
 public:
-    __attribute__ ((target ("popcnt")))
+    
     bool canSortArray(vector<int>& nums) {
         int prevcnt=0, prevmax=0;
         int cmax=0;

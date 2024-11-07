@@ -8,6 +8,7 @@
 */
 
 #include <immintrin.h>
+#pragma GCC target("sse2,sse4.1")
 /* 
     sse2: _mm_setr_epi32, _mm_slli_epi64, _mm_slli_si128, _mm_or_si128, _mm_setzero_si128
     sse4.1: _mm_testz_si128
@@ -17,10 +18,10 @@ typedef __m128i u128;
 
 class Solution {
 public:
-    // pseudo arithmetic shift left
+    // pseudo logical shift left
     static inline u128 shift(u128 bs, int x) {
         /*
-            This is not a real arithmetic shift left: since 128bit arithmetic is not supported, 64bit is used instead.
+            This is not a real logical shift left: since 128bit arithmetic is not supported, 64bit is used instead.
             shifting lower 64 bit and higher 64 bit as two isolated variables uint64_t,
             but this is ok since we only shift 0x1.
         */
@@ -55,6 +56,7 @@ public:
         // a | b
         return _mm_or_si128(a, b);
     }
+    
     vector<bool> checkIfPrerequisite(int numCourses, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) {
         vector<u128> bs(numCourses, _mm_setzero_si128()); // bitset array
         vector<vector<int>> adj(numCourses); // adjacency list
