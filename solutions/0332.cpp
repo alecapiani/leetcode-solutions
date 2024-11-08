@@ -29,9 +29,8 @@ public:
             }
             dfs.push(adj[x].top()); adj[x].pop();
         }
-        reverse(stops.begin(), stops.end());
         vector<string> ret(stops.size());
-        transform(stops.cbegin(), stops.cend(), ret.begin(), tos);
+        transform(stops.rbegin(), stops.rend(), ret.begin(), tos); // reverse
         return ret;
     }
 };
