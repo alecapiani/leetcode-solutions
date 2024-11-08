@@ -3,17 +3,16 @@
 // 0ms Solution with SIMD
 
 /*
-    This is an experimental approach with SIMD and got 0ms. 
     uint128_t should be preferred for semplicity, but got 3ms.
-    The difference is mainly in the bitwise OR (merge function + setbit)
+    The main difference is the bitwise OR (merge function + setbit)
     asm compiled with -O2:
-        por	%xmm1, %xmm0
-	    ret
+        por  %xmm1, %xmm0
+        ret
     vs. with uint128_t
-        movq	%rdi, %rax
-        orq	%rcx, %rsi
-        orq	%rdx, %rax
-        movq	%rsi, %rdx
+        movq %rdi, %rax
+        orq  %rcx, %rsi
+        orq  %rdx, %rax
+        movq %rsi, %rdx
         ret
 */
 
