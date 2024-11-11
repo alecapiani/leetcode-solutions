@@ -1,5 +1,7 @@
-# test executable
+# test files
 a.out
+*.s
+test-solutions/
 
 # vscode
 .vscode
